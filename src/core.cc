@@ -862,6 +862,9 @@ struct text_object *construct_text_object(char *s, const char *arg,
 	END OBJ_ARG(goto, 0, "goto needs arguments")
 		obj->data.l = atoi(arg);
 		obj->callbacks.print = &new_goto;
+	END OBJ_ARG(gotoy, 0, "gotoy needs arguments")
+		obj->data.l = atoi(arg);
+		obj->callbacks.print = &new_gotoy;
 #ifdef BUILD_X11
 	END OBJ(tab, 0)
 		scan_tab(obj, arg);

@@ -1196,6 +1196,10 @@ static int text_size_updater(char *s, int special_index)
 				if (current->arg > cur_x) {
 					w = (int) current->arg;
 				}
+			} else if (current->type == GOTOY) {
+				if (current->arg > cur_y) {
+					last_font_height = (int) current->arg;
+				}
 			} else if (current->type == TAB) {
 				int start = current->arg;
 				int step = current->width;
@@ -1817,6 +1821,23 @@ int draw_each_line_inner(char *s, int special_index, int last_special_applied)
 							int x, y;
 							getyx(ncurses_window, y, x);
 							move(y, cur_x);
+						}
+#endif /* BUILD_NCURSES */
+					}
+					break;
+
+				case GOTOY:
+					if (current->arg >= 0) {
+#ifdef BUILD_X11
+						cur_y = (int) current->arg;
+						//make sure shades are 1 pixel to the bottom of the text
+						if(draw_mode == BG) cur_y++;
+#endif /* BUILD_X11 */
+#ifdef BUILD_NCURSES
+						if (out_to_ncurses.get(*state)){
+							int x, y;
+							getyx(ncurses_window, y, x);
+							move(cur_y, x);
 						}
 #endif /* BUILD_NCURSES */
 					}

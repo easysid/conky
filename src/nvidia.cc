@@ -296,6 +296,7 @@ const char* translate_nvidia_special_type[] = {
  	"", // VOFFSET
  	"", // FONT
  	"", // GOTO
+ 	"", // GOTOY
  	"" // TAB
 };
 

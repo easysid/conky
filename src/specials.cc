@@ -747,6 +747,13 @@ void new_goto(struct text_object *obj, char *p, int p_max_size)
 	new_special(p, GOTO)->arg = obj->data.l;
 }
 
+void new_gotoy(struct text_object *obj, char *p, int p_max_size)
+{
+	if (!p_max_size)
+		return;
+	new_special(p, GOTOY)->arg = obj->data.l;
+}
+
 void scan_tab(struct text_object *obj, const char *arg)
 {
 	struct tab *t;
